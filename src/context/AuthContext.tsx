@@ -3,6 +3,7 @@ import { api } from '../services/api';
 
 type User = {
   firstName: string;
+  lastName?: string;
   initials: string;
   email: string;
   hasNotification: boolean;
@@ -66,7 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const signup = async (firstName: string, lastName: string, email: string, password?: string) => {
+  const signup = async (firstName: string, lastName: string, email: string, _password?: string) => {
     try {
       // Mock API call for signup since it's not fully implemented on backend yet
       // await api.post('/web-auth/signup', { firstName, lastName, email, password });
@@ -74,6 +75,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const initials = (firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
       setUser({
         firstName,
+        lastName,
         initials: initials || 'NJ',
         email,
         hasNotification: true,

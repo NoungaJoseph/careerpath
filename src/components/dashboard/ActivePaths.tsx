@@ -1,16 +1,6 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Zap, Clock } from 'lucide-react';
-
-type ActivePath = {
-  id: string;
-  categoryKey: string;
-  title: string;
-  difficulty: 'beginner' | 'intermediate';
-  hours: number;
-  image: string;
-};
 
 type ActivePathsProps = {
   activePaths: any[];
@@ -18,9 +8,6 @@ type ActivePathsProps = {
 
 export default function ActivePaths({ activePaths }: ActivePathsProps) {
   const { t } = useTranslation();
-
-  // Toggle between empty and populated for demo
-  const [showPopulated, setShowPopulated] = useState(false);
 
   // For the purpose of moving from mock data, we will map backend data to the required format
   // or just use the passed in activePaths directly if it matches.

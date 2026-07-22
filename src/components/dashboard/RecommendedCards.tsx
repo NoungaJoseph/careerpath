@@ -7,7 +7,7 @@ type RecommendedCardsProps = {
   recommended: any[];
 };
 
-export default function RecommendedCards({ recommended }: RecommendedCardsProps) {
+export default function RecommendedCards({ }: RecommendedCardsProps) {
   const { t } = useTranslation();
   const { user } = useAuth();
 
