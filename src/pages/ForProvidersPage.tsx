@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { Award, CheckCircle, Shield, TrendingUp } from 'lucide-react';
+import { Award, Shield, TrendingUp } from 'lucide-react';
 
 export default function ForProvidersPage() {
   const { t } = useTranslation();

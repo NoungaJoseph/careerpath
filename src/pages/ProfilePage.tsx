@@ -1,10 +1,10 @@
-import { useTranslation } from 'react-i18next';
+
 import DashboardNav from '../components/dashboard/DashboardNav';
 import Footer from '../components/Footer';
 import { UserCircle } from 'lucide-react';
 
 export default function ProfilePage() {
-  const { t } = useTranslation();
+
 
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans antialiased text-gray-800">

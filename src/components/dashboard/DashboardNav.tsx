@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronRight, MessageSquare, UserCircle, Settings, Share2, LogOut } from 'lucide-react';
+import { ChevronRight, UserCircle, Settings, Share2, LogOut } from 'lucide-react';
 
 export default function DashboardNav() {
   const { t, i18n } = useTranslation();

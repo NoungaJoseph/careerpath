@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { BookOpen, PenTool, ExternalLink, UploadCloud, Play } from 'lucide-react';
-import type { TaskDefinition, StepDefinition } from './TaskFlowSidebar';
+import type { TaskDefinition } from './TaskFlowSidebar';
 
 export default function TaskFlowContent({
   task,
@@ -174,7 +174,7 @@ export default function TaskFlowContent({
         
         {/* Step Indicators */}
         <div className="flex items-center gap-1">
-          {task.steps.map((s, i) => (
+          {task.steps.map((_, i) => (
             <div 
               key={i} 
               className={`w-8 h-8 rounded flex items-center justify-center text-sm font-bold transition-colors ${
