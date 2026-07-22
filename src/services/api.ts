@@ -17,3 +17,11 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export const careerpathApi = {
+  onboardSkills: (data: { selectedSkills: string[] }) => api.post('/careerpath/onboard', data),
+  enroll: (data: { categoryKey: string }) => api.post('/careerpath/enroll', data),
+  completeModule: (data: { categoryKey: string, moduleId: string, examScore: number }) => api.post('/careerpath/module/complete', data),
+  generateCertificate: (data: { categoryKey: string }) => api.post('/careerpath/certificate', data),
+  getUserDashboard: () => api.get('/careerpath/dashboard'),
+};

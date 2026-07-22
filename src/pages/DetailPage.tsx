@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
+import { careerpathApi } from '../services/api';
 import DashboardNav from '../components/dashboard/DashboardNav';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -460,9 +461,16 @@ export default function DetailPage() {
 
   const currentTask = currentPath.tasks[selectedTaskIdx] || currentPath.tasks[0];
 
-  const handleStartPath = () => {
+  const handleStartPath = async () => {
     if (isLoggedIn) {
-      navigate(`/career-paths/${categoryKey || 'electrical'}/flow`);
+      try {
+        await careerpathApi.enroll({ categoryKey: categoryKey || 'electrical' });
+        navigate(`/career-paths/${categoryKey || 'electrical'}/flow`);
+      } catch (err) {
+        console.error("Failed to enroll", err);
+        // Navigate anyway for robustness if already enrolled
+        navigate(`/career-paths/${categoryKey || 'electrical'}/flow`);
+      }
     } else {
       navigate(`/login?redirect=/career-paths/${categoryKey || 'electrical'}/flow`);
     }

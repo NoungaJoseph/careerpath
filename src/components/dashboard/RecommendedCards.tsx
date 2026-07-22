@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import { Zap, Droplets, RefreshCw, PlayCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-export default function RecommendedCards() {
+type RecommendedCardsProps = {
+  recommended: any[];
+};
+
+export default function RecommendedCards({ recommended }: RecommendedCardsProps) {
   const { t } = useTranslation();
   const { user } = useAuth();
 

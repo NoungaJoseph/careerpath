@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { careerpathApi } from '../services/api';
 import DashboardNav from '../components/dashboard/DashboardNav';
 import IntakeSurvey from '../components/dashboard/IntakeSurvey';
 import TaskFlowSidebar from '../components/dashboard/TaskFlowSidebar';
@@ -96,7 +97,7 @@ export default function TaskFlowPage() {
     }
   ];
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (activeTaskIndex >= tasks.length) return;
     
     const currentTask = tasks[activeTaskIndex];
@@ -106,6 +107,16 @@ export default function TaskFlowPage() {
       updateActivePath(categoryKey || 'electrical', activeTaskIndex, activeStepIndex + 1);
     } else {
       // Task completed
+      try {
+        await careerpathApi.completeModule({
+          categoryKey: categoryKey || 'electrical',
+          moduleId: `task-${activeTaskIndex + 1}`,
+          examScore: 100 // Mock exam score for now since there's no real exam UI yet
+        });
+      } catch (err) {
+        console.error("Failed to mark module as complete", err);
+      }
+
       if (!completedTaskIndexes.includes(activeTaskIndex)) {
         setCompletedTaskIndexes(prev => [...prev, activeTaskIndex]);
       }
@@ -117,8 +128,15 @@ export default function TaskFlowPage() {
       if (activeTaskIndex + 1 < tasks.length) {
         updateActivePath(categoryKey || 'electrical', activeTaskIndex + 1, 0);
       } else {
-        // Flow finished, clear active path
+        // Flow finished, clear active path and generate certificate
         updateActivePath(null);
+        try {
+          await careerpathApi.generateCertificate({
+            categoryKey: categoryKey || 'electrical'
+          });
+        } catch (err) {
+          console.error("Failed to generate certificate", err);
+        }
       }
     }
   };
