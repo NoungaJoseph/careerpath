@@ -30,11 +30,16 @@ export default function SignupPage() {
     }
   };
 
-  const handleFinishSignup = (e: React.FormEvent) => {
+  const handleFinishSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     if (firstName && lastName && password && dob && status) {
-      signup(firstName, lastName, email);
-      navigate(redirectTo);
+      try {
+        await signup(firstName, lastName, email, password);
+        navigate(redirectTo);
+      } catch (error) {
+        console.error("Signup Error:", error);
+        alert("Failed to sign up.");
+      }
     }
   };
 

@@ -16,11 +16,16 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      login(email);
-      navigate(redirectTo);
+      try {
+        await login(email, password);
+        navigate(redirectTo);
+      } catch (error) {
+        console.error("Login Error:", error);
+        alert("Invalid login credentials. Ensure your backend is running!");
+      }
     }
   };
 
