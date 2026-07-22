@@ -10,7 +10,7 @@ export default function Navbar() {
 
   const navLinks = [
     { key: 'careerPaths', href: '/catalog' },
-    { key: 'howItWorks', href: '/#how-it-works' },
+    { key: 'howItWorks', href: '/how-it-works' },
     { key: 'forProviders', href: '/for-providers' },
   ];
 
