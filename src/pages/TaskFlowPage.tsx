@@ -108,13 +108,18 @@ export default function TaskFlowPage() {
     } else {
       // Task completed
       try {
+        // Random score between 50 and 100 to simulate an exam result
+        const simulatedScore = Math.floor(Math.random() * 51) + 50; 
+        
         await careerpathApi.completeModule({
           categoryKey: categoryKey || 'electrical',
           moduleId: `task-${activeTaskIndex + 1}`,
-          examScore: 100 // Mock exam score for now since there's no real exam UI yet
+          examScore: simulatedScore
         });
-      } catch (err) {
+      } catch (err: any) {
         console.error("Failed to mark module as complete", err);
+        alert(err.response?.data?.message || "Exam failed! You must score at least 70% to unlock the next module. Please review the material and try again.");
+        return; // Block progression
       }
 
       if (!completedTaskIndexes.includes(activeTaskIndex)) {
@@ -134,8 +139,12 @@ export default function TaskFlowPage() {
           await careerpathApi.generateCertificate({
             categoryKey: categoryKey || 'electrical'
           });
+          alert("Congratulations! You have completed the course and earned a certificate. Check your dashboard.");
+          navigate('/dashboard');
         } catch (err) {
           console.error("Failed to generate certificate", err);
+          alert("Course completed, but there was an error generating your certificate. Please contact support.");
+          navigate('/dashboard');
         }
       }
     }
