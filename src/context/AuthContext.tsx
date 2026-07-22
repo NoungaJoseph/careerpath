@@ -7,6 +7,13 @@ type User = {
   hasNotification: boolean;
   certificatesCount: number;
   skillsCount: number;
+  profileStrength: number;
+  completedSurveys: string[];
+  activePath: {
+    categoryKey: string;
+    taskIndex: number;
+    stepIndex: number;
+  } | null;
 };
 
 type AuthContextType = {
@@ -15,6 +22,8 @@ type AuthContextType = {
   login: (email: string) => void;
   signup: (firstName: string, lastName: string, email: string) => void;
   logout: () => void;
+  completeSurvey: (pathId: string) => void;
+  updateActivePath: (categoryKey: string | null, taskIndex?: number, stepIndex?: number) => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
@@ -23,6 +32,8 @@ const AuthContext = createContext<AuthContextType>({
   login: () => {},
   signup: () => {},
   logout: () => {},
+  completeSurvey: () => {},
+  updateActivePath: () => {},
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -40,6 +51,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       hasNotification: true,
       certificatesCount: 0,
       skillsCount: 0,
+      profileStrength: 65, // Mock value for "Good" tier
+      completedSurveys: [],
+      activePath: null,
     });
   };
 
@@ -52,13 +66,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       hasNotification: true,
       certificatesCount: 0,
       skillsCount: 0,
+      profileStrength: 25, // Mock value for "Basic" tier for new users
+      completedSurveys: [],
+      activePath: null,
     });
   };
 
   const logout = () => setUser(null);
 
+  const completeSurvey = (pathId: string) => {
+    if (user && !user.completedSurveys.includes(pathId)) {
+      setUser({ ...user, completedSurveys: [...user.completedSurveys, pathId] });
+    }
+  };
+
+  const updateActivePath = (categoryKey: string | null, taskIndex = 0, stepIndex = 0) => {
+    if (user) {
+      if (categoryKey) {
+        setUser({ ...user, activePath: { categoryKey, taskIndex, stepIndex } });
+      } else {
+        setUser({ ...user, activePath: null });
+      }
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoggedIn: !!user, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, isLoggedIn: !!user, login, signup, logout, completeSurvey, updateActivePath }}>
       {children}
     </AuthContext.Provider>
   );
