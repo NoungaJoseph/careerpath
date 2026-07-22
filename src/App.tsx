@@ -15,6 +15,23 @@ import HowItWorksPage from './pages/HowItWorksPage';
 import FAQPage from './pages/FAQPage';
 import AboutUsPage from './pages/AboutUsPage';
 import CareersPage from './pages/CareersPage';
+import { Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import DashboardPage from './pages/DashboardPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import CatalogPage from './pages/CatalogPage';
+import OpportunitiesPage from './pages/OpportunitiesPage';
+import ProgramInfoPage from './pages/ProgramInfoPage';
+import DetailPage from './pages/DetailPage';
+import CertificatesPage from './pages/CertificatesPage';
+import ForProvidersPage from './pages/ForProvidersPage';
+import ScrollToTop from './components/ScrollToTop';
+
+import HowItWorksPage from './pages/HowItWorksPage';
+import FAQPage from './pages/FAQPage';
+import AboutUsPage from './pages/AboutUsPage';
+import CareersPage from './pages/CareersPage';
 import BlogPage from './pages/BlogPage';
 import ContactPage from './pages/ContactPage';
 import HelpCenterPage from './pages/HelpCenterPage';
@@ -23,6 +40,10 @@ import TermsOfUsePage from './pages/TermsOfUsePage';
 
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import TaskFlowPage from './pages/TaskFlowPage';
+
+import ProfilePage from './pages/ProfilePage';
+import SettingsPage from './pages/SettingsPage';
+import ReferralPage from './pages/ReferralPage';
 
 function App() {
   return (
@@ -50,6 +71,9 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/terms" element={<TermsOfUsePage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/referrals" element={<ReferralPage />} />
       </Routes>
     </div>
   );
