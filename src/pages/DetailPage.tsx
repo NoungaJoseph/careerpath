@@ -84,7 +84,7 @@ export default function DetailPage() {
     const keyToUse = categoryKey || 'electrical';
     setIsSaving(true);
     try {
-      const response = await careerpathApi.toggleBookmark(keyToUse);
+      await careerpathApi.toggleBookmark(keyToUse);
       // We rely on the button's visual state and backend change instead of an alert
     } catch (err: any) {
       console.error("Failed to toggle bookmark", err);

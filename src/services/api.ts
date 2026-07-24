@@ -10,6 +10,14 @@ export const api = axios.create({
   withCredentials: true, // Necessary to send/receive secure cookies
 });
 
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('careerpath_token');
+  if (token && config.headers) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 // Response interceptor to catch auth errors globally (optional)
 api.interceptors.response.use(
   (response) => response,
