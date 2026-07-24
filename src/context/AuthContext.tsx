@@ -6,6 +6,8 @@ type User = {
   lastName?: string;
   initials: string;
   email: string;
+  dob?: string;
+  careerStatus?: string;
   hasNotification: boolean;
   certificatesCount: number;
   skillsCount: number;
@@ -22,7 +24,7 @@ type AuthContextType = {
   user: User | null;
   isLoggedIn: boolean;
   login: (email: string, password?: string) => Promise<void>;
-  signup: (firstName: string, lastName: string, email: string, password?: string) => Promise<void>;
+  signup: (firstName: string, lastName: string, email: string, password?: string, dob?: string, status?: string) => Promise<void>;
   logout: () => void;
   completeSurvey: (pathId: string) => void;
   updateActivePath: (categoryKey: string | null, taskIndex?: number, stepIndex?: number) => void;
@@ -43,17 +45,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password?: string) => {
     try {
-      const response = await api.post('/web-auth/login', { identifier: email, password: password || 'default' });
+      const response = await api.post('/v1/web-auth/login', { identifier: email, password: password || 'default' });
       const apiUser = response.data.user;
       
       const parts = email.split('@')[0];
       const name = apiUser?.fullName || parts.charAt(0).toUpperCase() + parts.slice(1);
-      const initials = name.substring(0, 2).toUpperCase();
+      const nameParts = name.split(' ');
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
+      const initials = (firstName.charAt(0) + (lastName ? lastName.charAt(0) : '')).toUpperCase() || 'U';
       
       setUser({
-        firstName: name,
-        initials: initials,
+        firstName,
+        lastName,
+        initials,
         email,
+        dob: response.data.user.dob,
+        careerStatus: response.data.user.careerStatus,
         hasNotification: true,
         certificatesCount: 0,
         skillsCount: 0,
@@ -67,17 +75,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const signup = async (firstName: string, lastName: string, email: string, _password?: string) => {
+  const signup = async (firstName: string, lastName: string, email: string, password?: string, dob?: string, status?: string) => {
     try {
-      // Mock API call for signup since it's not fully implemented on backend yet
-      // await api.post('/web-auth/signup', { firstName, lastName, email, password });
-      
+      const response = await api.post('/v1/web-auth/signup', { firstName, lastName, email, password, dob, status });
+      const apiUser = response.data.user;
+
       const initials = (firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
       setUser({
         firstName,
         lastName,
         initials: initials || 'NJ',
         email,
+        dob: apiUser.dob,
+        careerStatus: apiUser.careerStatus,
         hasNotification: true,
         certificatesCount: 0,
         skillsCount: 0,

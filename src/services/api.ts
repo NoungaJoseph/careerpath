@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
+let API_URL = import.meta.env.VITE_API_URL || 'https://api.usefixam.com/api';
 if (API_URL && !API_URL.endsWith('/api') && !API_URL.endsWith('/api/')) {
   API_URL = API_URL.replace(/\/$/, '') + '/api';
 }
@@ -22,9 +22,10 @@ api.interceptors.response.use(
 );
 
 export const careerpathApi = {
-  onboardSkills: (data: { selectedSkills: string[] }) => api.post('/careerpath/onboard', data),
-  enroll: (data: { categoryKey: string }) => api.post('/careerpath/enroll', data),
-  completeModule: (data: { categoryKey: string, moduleId: string, examScore: number }) => api.post('/careerpath/module/complete', data),
-  generateCertificate: (data: { categoryKey: string }) => api.post('/careerpath/certificate', data),
-  getUserDashboard: () => api.get('/careerpath/dashboard'),
+  onboardSkills: (data: { selectedSkills: string[] }) => api.post('/v1/careerpath/onboard', data),
+  enroll: (data: { categoryKey: string }) => api.post('/v1/careerpath/enroll', data),
+  completeModule: (data: { categoryKey: string, moduleId: string, examScore: number }) => api.post('/v1/careerpath/module/complete', data),
+  generateCertificate: (data: { categoryKey: string }) => api.post('/v1/careerpath/certificate', data),
+  getUserDashboard: () => api.get('/v1/careerpath/dashboard'),
+  toggleBookmark: (categoryKey: string) => api.post(`/v1/careerpath/bookmark/${categoryKey}`),
 };
