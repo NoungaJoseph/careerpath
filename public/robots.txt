@@ -1,0 +1,15 @@
+# ==========================================
+# Fixam Career Pathways Robots.txt
+# ==========================================
+
+User-agent: *
+Allow: /
+
+# Disallow private user flows & portals
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /settings
+Disallow: /task-flow
+Disallow: /forgot-password
+
+Sitemap: https://careerpath.usefixam.com/sitemap.xml

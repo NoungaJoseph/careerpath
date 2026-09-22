@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import DashboardNav from '../components/dashboard/DashboardNav';
 import Footer from '../components/Footer';
+import { useSEO } from '../hooks/useSEO';
 import {
   Zap, Droplets, Hammer, Sparkles, Scissors, Paintbrush,
   Wrench, Leaf, Shirt, Utensils, GraduationCap, Construction,
@@ -23,6 +24,12 @@ type CareerPath = {
 };
 
 export default function CatalogPage() {
+  useSEO({
+    title: 'Vocational Skills Catalog | Fixam Career Pathways',
+    description: 'Explore our catalog of certified trade skills courses: electrical wiring, plumbing, HVAC repair, solar installation, carpentry, and masonry in Cameroon.',
+    canonical: 'https://careerpath.usefixam.com/catalog'
+  });
+
   const { t } = useTranslation();
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();

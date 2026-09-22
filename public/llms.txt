@@ -1,0 +1,23 @@
+# Fixam Career Pathways — Vocational Training & Skilled Trades Platform
+
+> Fixam Career Pathways (`https://careerpath.usefixam.com`) is the specialized vocational training, skill certification, and trade career development arm of Fixam in Cameroon.
+
+## Core Mission & Offerings
+- **Vocational Skill Certification:** Structured learning modules for electrical wiring, plumbing, solar installation, refrigeration, and carpentry.
+- **Apprenticeships & Job Placement:** Direct pipeline connecting trained trade professionals with active job requests on the main Fixam Marketplace platform.
+- **Micro-Certifications:** Verified digital certificates awarded upon mastery of practical trade modules.
+
+## Key Training Programs
+1. **Certified Electrical Installation Technician**
+2. **Plumbing Systems & Drainage Specialist**
+3. **HVAC & Refrigeration Maintenance Expert**
+4. **Solar Energy & Off-Grid Power Installer**
+5. **Modern Carpentry & Woodcrafting**
+6. **Commercial Cleaning & Facility Sanitation**
+
+## Key URLs
+- **Main Portal:** [https://careerpath.usefixam.com/](https://careerpath.usefixam.com/)
+- **Course Catalog:** [https://careerpath.usefixam.com/catalog](https://careerpath.usefixam.com/catalog)
+- **Career Opportunities:** [https://careerpath.usefixam.com/opportunities](https://careerpath.usefixam.com/opportunities)
+- **How It Works:** [https://careerpath.usefixam.com/how-it-works](https://careerpath.usefixam.com/how-it-works)
+- **FAQs:** [https://careerpath.usefixam.com/faqs](https://careerpath.usefixam.com/faqs)
